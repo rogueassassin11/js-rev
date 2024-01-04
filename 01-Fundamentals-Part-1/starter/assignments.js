@@ -33,9 +33,10 @@ const isIsland = false;
 */
 
 ////////////////////////////////////////
-// BASIC OPERATORS
+// BASIC OPERATORS + STRING TEMPLATE LITERALS
 /*
 let population = 300;
+let language = "Shire Common Tongue";
 console.log(population / 2);
 console.log(population++);
 console.log(population > 6000000);
@@ -44,6 +45,38 @@ let description =
   "Shire is in Middle-earth, and its" +
   " " +
   population +
-  " Hobbits speak the Shire Common Tongue.";
+  " Hobbits speak the " +
+  language;
 console.log(description);
+
+description = `Shire is in Middle-earth, and its ${population} Hobbits speak the ${language}.`;
+console.log(description);
+*/
+
+////////////////////////////////////////
+// IF / ELSE
+/*
+let population = 3000000000;
+
+if (population > 33000000) {
+  console.log(`Shire's population is above average.`);
+} else {
+  console.log(`Shire's population is ${33000000 - population} below average.`);
+}
+*/
+
+////////////////////////////////////////
+// EQUALITY OPERATORS
+/*
+const numNeighbors = Number(
+  prompt(`How many neighbor countries does your country have?`)
+);
+
+if (numNeighbors === 1) {
+  console.log(`Only 1 border`);
+} else if (numNeighbors > 1) {
+  console.log(`More than 1 border`);
+} else {
+  console.log(`No borders`);
+}
 */

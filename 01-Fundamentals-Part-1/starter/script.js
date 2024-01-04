@@ -107,3 +107,149 @@ console.log(ageChise >= 18);
 
 const isFullAge = ageChise >= 18;
 */
+
+////////////////////////////////////////
+// OPERATOR PRECEDENCE
+/*
+const now = 2200;
+const ageElias = now - 1991;
+const ageChise = now - 2050;
+
+console.log(now - 1991 > now - 2018);
+console.log(25 - 10 - 5);
+
+let x, y;
+x = y = 25 - 10 - 5;
+console.log(x, y);
+
+const averageAge = (ageElias + ageChise) / 2;
+console.log(ageElias, ageChise, averageAge);
+*/
+
+////////////////////////////////////////
+// STRINGS AND TEMPLATE LITERALS
+/*
+const firstName = "Elias";
+const job = "Magus";
+const birthYear = 2000;
+const year = 2200;
+
+const elias =
+  "I'm " + firstName + ", a " + (year - birthYear) + " years old " + job + "!";
+console.log(elias);
+
+const eliasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(eliasNew);
+
+console.log(`Just a regular string...`);
+
+//Multi-line strings:
+console.log(
+  "String with \n\
+multiple \n\
+lines"
+);
+
+console.log(`String
+multiple
+lines with`);
+*/
+
+////////////////////////////////////////
+// IF/ELSE
+/*
+const age = 15;
+
+if (age >= 18) {
+  console.log("Chise can start her driving license.");
+} else {
+  const yearsLeft = 18 - age;
+  console.log(`Chise is still too young. Wait another ${yearsLeft} years :)`);
+}
+
+const birthYear = 1991;
+let century;
+
+if (birthYear <= 2000) {
+  century = 20;
+} else {
+  century = 21;
+}
+
+console.log(century);
+*/
+
+////////////////////////////////////////
+// TYPE CONVERSION + TYPE COERCION
+/*
+// Type conversion
+const inputYear = "1991";
+console.log(Number(inputYear));
+console.log(Number(inputYear) + 18);
+
+console.log(Number("Elias")); //NaN
+console.log(typeof NaN); // an invalid no.
+
+console.log(String(23));
+
+// Type coercion -> the number was converted to string
+console.log("I am " + 200 + " years old");
+// string converted to no.
+console.log("23" - "10" - 3);
+console.log("23" / "2");
+
+let n = "1" + 1; // '11'
+n = n - 1;
+console.log(n); // 10
+*/
+
+////////////////////////////////////////
+// TRUTHY AND FALSY VALUES
+/*
+// 5 falsy values: 0, '', undefined, null, NaN
+
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean("Elias"));
+console.log(Boolean({}));
+console.log(Boolean(""));
+
+const money = 500;
+if (money) {
+  console.log(`Don't spend it all!`);
+} else {
+  console.log(`You should get a job!`);
+}
+
+let height;
+if (height) {
+  console.log(`Yay! Height is defined!`);
+} else {
+  console.log("Height is UNDEFINED!");
+}
+*/
+
+////////////////////////////////////////
+// EQUALITY OPERATORS
+// '===' -> does not perform type coercion
+// '==' -> performs type coercion
+/*
+const age = "18";
+if (age === 18) console.log(`You just became an adult! (Strict)`);
+if (age == 18) console.log(`You just became an adult! (loose)`);
+
+const favorite = Number(prompt("What's your favorite number?"));
+console.log(favorite);
+console.log(typeof favorite);
+
+if (favorite === 23) {
+  console.log("Cool! 23 is an amazing number!");
+} else if (favorite === 7) {
+  console.log("7 is also a cool number");
+} else {
+  console.log("Number is not 23 or 7");
+}
+
+// Different/Not Equal Operator
+if (favorite !== 23) console.log("Why not 23?");
+*/
