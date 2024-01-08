@@ -80,3 +80,56 @@ if (numNeighbors === 1) {
   console.log(`No borders`);
 }
 */
+
+////////////////////////////////////////
+// LOGICAL OPERATORS
+/*
+let country = "Shire";
+let continent = "Middle-earth";
+let population = 300;
+let language = "English";
+let isIsland = false;
+
+if (language === "English" && population < 500 && !isIsland) {
+  console.log(`You should live in ${country}. :)`);
+} else {
+  console.log(`${country} does not meet your criteria. :(`);
+}
+*/
+
+////////////////////////////////////////
+// SWITCH STATEMENT
+/*
+const language = "German";
+
+switch (language) {
+  case "Chinese":
+  case "Mandarin":
+    console.log(`Most number of native speakers!`);
+    break;
+  case "Spanish":
+    console.log(`2nd place in number of native speakers`);
+    break;
+  case "English":
+    console.log(`3rd place`);
+    break;
+  case "Hindi":
+    console.log(`Number 4`);
+    break;
+  case "Arabic":
+    console.log(`5th most spoken language`);
+    break;
+  default:
+    console.log("Great language too. :D");
+}
+*/
+
+////////////////////////////////////////
+// TERNARY OPERATOR
+/*
+const population = 300;
+
+console.log(
+  `Shire's population is ${population >= 100 ? "above" : "below"} average`
+);
+*/

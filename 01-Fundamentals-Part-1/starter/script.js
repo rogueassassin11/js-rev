@@ -253,3 +253,98 @@ if (favorite === 23) {
 // Different/Not Equal Operator
 if (favorite !== 23) console.log("Why not 23?");
 */
+
+////////////////////////////////////////
+// LOGICAL OPERATORS
+/*
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+const shouldDrive = hasDriversLicense && hasGoodVision;
+
+if (hasDriversLicense && hasGoodVision) {
+  console.log("Chise is able to drive!");
+} else {
+  console.log("Someone else should drive...");
+}
+
+const isTired = false;
+
+console.log(hasDriversLicense || hasGoodVision || isTired);
+
+if (hasDriversLicense && hasGoodVision && !isTired) {
+  console.log("Chise is able to drive!");
+} else {
+  console.log("Someone else should drive...");
+}
+*/
+
+////////////////////////////////////////
+// SWITCH STATEMENT
+// switch is a strict comparison
+/*
+const day = "Saturday";
+
+switch (day) {
+  case "Monday":
+    console.log("Plan course structure");
+    console.log(`Go to coding meetup`);
+    break;
+  case "Tuesday":
+    console.log(`Prepare theory videos`);
+    break;
+  case "Wednesday":
+  case "Thursday":
+    console.log(`Write code examples`);
+    break;
+  case "Friday":
+    console.log("Record videos");
+    break;
+  case "Saturday":
+  case "Sunday":
+    console.log(`Enjoy the weekend`);
+    break;
+  default:
+    console.log(`Not a valid day`);
+}
+*/
+
+////////////////////////////////////////
+// STATEMENTS + EXPRESSIONS
+// expression = a piece of code that produces value (words)
+// statements = a bigger piece of code that doesn't produce a value (sentence)
+// template literals all insert an expression
+
+////////////////////////////////////////
+// CONDITIONAL OPERATOR (TERNARY OPERATOR)
+// it produces a value and can be used in a template literal
+/*
+const age = 23;
+age >= 18
+  ? console.log(`I like to drink wine.`)
+  : console.log(`I like to drink water.`);
+
+const drink = age >= 18 ? `wine` : `water`;
+console.log(drink);
+
+// without TERNARY OPERATOR
+let drink2;
+if (age >= 18) {
+  drink2 = `wine`;
+} else {
+  drink2 = `water`;
+}
+console.log(drink2);
+
+console.log(`I like to drink ${age >= 18 ? `wine` : `water`}`);
+*/
+
+////////////////////////////////////////
+// JAVASCRIPT VERSIONS
+// Brendan Eich -> created the first version of JavaScript
+// JavaScript has backwards compatibility, nothing is removed, new releases are just updates and added (Don't break the web)
+// There is no forward compatibility
