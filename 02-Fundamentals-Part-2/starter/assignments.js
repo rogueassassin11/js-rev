@@ -68,3 +68,56 @@ function describePopulation(country, population) {
 
 console.log(describePopulation(`Shire`, 300));
 */
+
+///////////////////////////////////////
+// ARRAYS
+/*
+const population = [300, 400, 500, 600];
+console.log(population);
+
+console.log(population.length === 4);
+
+const percentageOfWorld3 = (populationValue) => (populationValue / 7900) * 100;
+
+const percentages = [
+  percentageOfWorld3(population[0]),
+  percentageOfWorld3(population[1]),
+  percentageOfWorld3(population[2]),
+  percentageOfWorld3(population[3]),
+];
+
+console.log(percentages);
+*/
+
+///////////////////////////////////////
+// BASIC ARRAY OPERATIONS
+/*
+const neighbours = ["Rivendale", "Rohan", "Gondor"];
+console.log(neighbours);
+
+neighbours.push("Utopia");
+console.log(neighbours);
+
+neighbours.pop("Utopia");
+console.log(neighbours);
+
+if (!neighbours.includes("Valinor")) {
+  console.log(`Probably not a Middle-Earth country`);
+}
+
+const countryIndex = neighbours.indexOf("Rohan");
+neighbours[countryIndex] = "Mordor";
+console.log(neighbours);
+*/
+
+///////////////////////////////////////
+// INTRO TO OBJECTS
+/*
+const myCountry = {
+  country: "Shire",
+  capital: "Hobbiton",
+  language: "Shire Common Tongue",
+  population: "300",
+  neigbours: ["Rivendale", "Rohan", "Gondor"],
+};
+*/
