@@ -325,3 +325,101 @@ for (let rep = 1; rep <= 10; rep++) {
   console.log(`Lifting weights repetition ${rep}`);
 }
 */
+
+///////////////////////////////////////
+// LOOPING ARRAYS + BREAKING & CONTINUING
+/*
+const jorahArray = [
+  "Jorah",
+  "Mormont",
+  2037 - 1991,
+  "Knight",
+  ["Daenerys", "Missandei", "Torgo"],
+  true,
+];
+
+const types = [];
+
+for (let i = 0; i < jorahArray.length; i++) {
+  // Reading an array
+  console.log(jorahArray[i], typeof jorahArray[i]);
+
+  // Filling types array
+  // types[i] = typeof jorahArray[i];
+  types.push(typeof jorahArray[i]);
+}
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+  ages.push(2037 - years[i]);
+}
+console.log(ages);
+
+// continue and break
+// continue skips the iteration
+console.log(`-----ONLY STRINGS-----`);
+for (let i = 0; i < jorahArray.length; i++) {
+  if (typeof jorahArray[i] !== "string") continue;
+
+  console.log(jorahArray[i], typeof jorahArray[i]);
+}
+
+// break stops the whole looping
+console.log(`-----ONLY NUMBERS-----`);
+for (let i = 0; i < jorahArray.length; i++) {
+  if (typeof jorahArray[i] === "number") break;
+
+  console.log(jorahArray[i], typeof jorahArray[i]);
+}
+*/
+
+///////////////////////////////////////
+// LOOPING BACKWARDS + NESTED LOOPS
+/*
+const jorahArray = [
+  "Jorah",
+  "Mormont",
+  2037 - 1991,
+  "Knight",
+  ["Daenerys", "Missandei", "Torgo"],
+  true,
+];
+
+for (let i = jorahArray.length - 1; i >= 0; i--) {
+  console.log(i, jorahArray[i]);
+}
+
+// nested loops
+for (let exercise = 1; exercise <= 3; exercise++) {
+  console.log(`---Starting Exercise ${exercise}-----`);
+
+  for (let rep = 1; rep <= 5; rep++) {
+    console.log(`Exercise ${exercise} repetition ${rep}`);
+  }
+}
+*/
+
+///////////////////////////////////////
+// WHILE LOOP
+/*
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep}`);
+}
+
+// condition can be anything at all and not dependent on a counter variable
+let rep = 1;
+while (rep <= 10) {
+  console.log(`While Loop: Lifting weights repetition ${rep}`);
+  rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  if (dice === 6) console.log(`Loop is to end`);
+}
+*/

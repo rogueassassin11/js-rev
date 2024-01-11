@@ -176,3 +176,55 @@ for (let i = 1; i <= 50; i++) {
   console.log(`Voter number ${i} is currently voting!`);
 }
 */
+
+///////////////////////////////////////
+// LOOPING ARRAYS + BREAKING & CONTINUING
+/*
+const populations = [300, 400, 500, 600];
+const percentages2 = [];
+
+function percentageOfWorld1(populationValue) {
+  return (populationValue / 7900) * 100;
+}
+
+for (let i = 0; i < populations.length; i++) {
+  percentages2.push(percentageOfWorld1(populations[i]));
+}
+
+console.log(percentages2);
+*/
+
+///////////////////////////////////////
+// LOOPING BACKWARDS + NESTED LOOPS
+/*
+const listOfNeighbours = [
+  ["Canada", "Mexico"],
+  ["Spain"],
+  ["Norway", "Sweden", "Russia"],
+];
+
+for (let i = 0; i < listOfNeighbours.length; i++) {
+  for (let j = 0; j < listOfNeighbours[i].length; j++) {
+    console.log(`Neighbour: ${listOfNeighbours[i][j]}`);
+  }
+}
+*/
+
+///////////////////////////////////////
+// WHILE LOOP
+/*
+const populations = [300, 400, 500, 600];
+const percentages3 = [];
+
+function percentageOfWorld1(populationValue) {
+  return (populationValue / 7900) * 100;
+}
+
+let i = 0;
+while (i < populations.length) {
+  percentages3.push(percentageOfWorld1(populations[i]));
+  i++;
+}
+
+console.log(percentages3);
+*/
