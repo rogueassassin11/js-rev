@@ -121,3 +121,58 @@ const myCountry = {
   neigbours: ["Rivendale", "Rohan", "Gondor"],
 };
 */
+
+///////////////////////////////////////
+// DOT VS. BRACKET NOTATION
+/*
+const myCountry = {
+  country: "Shire",
+  capital: "Hobbiton",
+  language: "Shire Common Tongue",
+  population: 300,
+  neighbours: ["Rivendale", "Rohan", "Gondor"],
+};
+
+console.log(
+  `${myCountry.country} has ${myCountry.population} ${myCountry.language} speaking people, and ${myCountry.neighbours.length} neighbouring countries, and a capital called ${myCountry.capital}.`
+);
+
+myCountry.population += 200;
+console.log(myCountry.population);
+myCountry["population"] -= 200;
+console.log(myCountry.population);
+*/
+
+///////////////////////////////////////
+// OBJECT METHODS
+/*
+const myCountry = {
+  country: "Shire",
+  capital: "Hobbiton",
+  language: "Shire Common Tongue",
+  population: 300,
+  neighbours: ["Rivendale", "Rohan", "Gondor"],
+
+  describe: function () {
+    console.log(
+      `${this.country} has ${this.population} ${this.language} speaking people, and ${this.neighbours.length} neighbouring countries, and a capital called ${this.capital}.`
+    );
+  },
+
+  checkIsland: function () {
+    this.isIsland = this.neighbours.length > 0 ? true : false;
+  },
+};
+
+myCountry.describe();
+myCountry.checkIsland();
+console.log(myCountry);
+*/
+
+///////////////////////////////////////
+// ITERATIONS: FOR LOOP
+/*
+for (let i = 1; i <= 50; i++) {
+  console.log(`Voter number ${i} is currently voting!`);
+}
+*/

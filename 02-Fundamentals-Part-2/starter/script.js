@@ -229,3 +229,99 @@ const jorah = {
   friends: ["Daenerys", "Missandei", "Torgo"],
 };
 */
+
+///////////////////////////////////////
+// DOT VS. BRACKET NOTATION
+/*
+const jorah = {
+  firstName: "Jorah",
+  lastName: "Mormont",
+  age: 2037 - 1991,
+  job: "Knight",
+  friends: ["Daenerys", "Missandei", "Torgo"],
+};
+
+console.log(jorah);
+
+// Dot Notation
+console.log(jorah.lastName);
+console.log(jorah["lastName"]);
+
+// bracket notation can put in an expression
+const nameKey = "Name";
+console.log(jorah["first" + nameKey]);
+console.log(jorah["last" + nameKey]);
+
+const interestedIn = prompt(
+  `What do you want to know about Jorah? Choose between firstName, lastName, age, job, and friends?`
+);
+
+if (jorah[interestedIn]) {
+  console.log(jorah[interestedIn]);
+} else {
+  console.log(
+    "Wrong request. Choose between firstName, lastName, age, job, and friends"
+  );
+}
+
+// adding properties
+jorah.location = "Bear Island";
+jorah["twitter"] = "@hereIstand";
+console.log(jorah);
+
+// Challenge
+// "Jorah has 3 friends, and his best friend is called Daenerys"
+
+console.log(
+  `${jorah.firstName} has ${jorah.friends.length} friends, and his best friend is called ${jorah.friends[0]}`
+);
+*/
+
+///////////////////////////////////////
+// OBJECT METHODS
+/*
+const jorah = {
+  firstName: "Jorah",
+  lastName: "Mormont",
+  birthYear: 1991,
+  job: "Knight",
+  friends: ["Daenerys", "Missandei", "Torgo"],
+  hasDriversLicense: false,
+
+  // every method gives access to 'this' keyword
+  // calcAge: function () {
+  //   // console.log(this);
+  //   return 2037 - this.birthYear;
+  // },
+
+  calcAge: function () {
+    this.age = 2037 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${
+      this.job
+    }, and he has ${
+      this.hasDriversLicense === true ? "a" : "no"
+    } driver's license`;
+  },
+};
+
+console.log(jorah.calcAge());
+console.log(jorah["calcAge"]());
+console.log(jorah.age);
+
+// Challenge
+// `Jorah is a 46-year old teacher, and he has a driver's license`
+console.log(jorah.getSummary());
+*/
+
+///////////////////////////////////////
+// ITERATION: FOR LOOP
+/*
+// for loop keeps running while condition is TRUE
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep}`);
+}
+*/
