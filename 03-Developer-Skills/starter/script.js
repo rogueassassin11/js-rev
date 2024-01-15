@@ -39,3 +39,46 @@ console.log();
 
 
 */
+
+/////////////////////////////////////////
+// DEBUGGING
+/*
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+    value: Number(prompt('Degrees celsius:')),
+  };
+
+  // FIND THE BUG
+  console.log(measurement);
+  console.table(measurement);
+  console.log(measurement.value);
+  // console.warn(measurement.value);
+  // console.error(measurement.value);
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+
+// A) IDENTIFY THE BUG
+console.log(measureKelvin());
+*/
+
+/////////////////////////////////////////
+// CODING CHALLENGE
+
+const forecastArr1 = [17, 21, 23];
+const forecastArr2 = [12, 5, -5, 0, 4];
+
+const printForecast = function (arr) {
+  let string = '... ';
+  for (let i = 0; i < arr.length; i++) {
+    string += `${arr[i]} degrees Celsius in ${i + 1} ${
+      i + 1 === 1 ? 'day' : 'days'
+    } ... `;
+  }
+  console.log(string);
+};
+
+printForecast(forecastArr1);
+printForecast(forecastArr2);
