@@ -231,8 +231,55 @@ const books = [
 ];
 
 ///////////////////////////////////////
-// DESTRUCTURING OBJECTS
+// SHORT CIRCUITING (|| and &&)
+/*
+function hasExamplesInJava(book) {
+  console.log(`${book.programmingLanguage === 'Java' || 'no data available'}`);
+}
+hasExamplesInJava(books[0]);
+hasExamplesInJava(books[1]);
 
+function loopBooks(bookArr) {
+  for (let i = 0; i < bookArr.length; i++) {
+    bookArr[i].onlineContent &&
+      console.log(`${bookArr[i].title} provides online content`);
+  }
+}
+
+loopBooks(books);
+*/
+
+///////////////////////////////////////
+// REST PATTERN AND PARAMETERS
+/*
+const [mainKeyword, ...rest] = books[0].keywords;
+console.log(mainKeyword, rest);
+
+const { publisher: bookPublisher, ...restOfTheBook } = books[1];
+console.log(bookPublisher, restOfTheBook);
+
+function printBookAuthorsCount(title, ...authors) {
+  console.log(`The book "${title}" has ${authors.length} authors`);
+}
+printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
+*/
+
+///////////////////////////////////////
+// SPREAD OPERATOR
+/*
+const bookAuthors = [...books[0].author, ...books[1].author];
+console.log(bookAuthors);
+
+function spellWord(str) {
+  console.log(...str);
+}
+
+spellWord('JavaScript');
+*/
+
+///////////////////////////////////////
+// DESTRUCTURING OBJECTS
+/*
 books[0].printBookInfo({
   title: 'Algorithms',
   author: 'Robert Sedgewick',
@@ -259,6 +306,7 @@ const {
   },
 } = books[0];
 console.log(bookRating);
+*/
 
 ///////////////////////////////////////
 // DESTRUCTURING ARRAYS

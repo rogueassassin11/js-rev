@@ -42,7 +42,154 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
+
+  // for spread operator
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
+  },
+
+  // for rest pattern and parameters
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
+
+///////////////////////////////////////
+// SHORT CIRCUITING (|| and &&)
+/*
+console.log(`----OR OPERATOR-----`);
+// use any data type, return any data type, short-circuiting
+// OR SHORT CIRCUITING - if the first value is a truthy, it immediately returns the first value
+console.log(3 || 'Elias');
+console.log('' || 'Elias');
+console.log(true || 0);
+console.log(undefined || null);
+
+// returns 'Hello' because it is the first truthy value
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+// if 0 it will not work
+restaurant.numGuests = 23;
+// restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+// AND OPERATOR SHORT CIRCUIT
+// when first is false, it will not evaluate anymore
+console.log('---- AND OPERATOR ----');
+console.log(0 && 'Elias');
+
+// takes the last value of true when consecutively truthy
+console.log(7 && 'Elias');
+
+console.log('Hello' && 23 && null && 'Elias');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+*/
+
+/////////////////////////////////////////
+// REST PATTERN AND PARAMETERS (...)
+// - compresses items
+// rest is on the left side of =
+// should always be the last
+/*
+// destructuring in array:
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+// destructuring in objects:
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+// In functions (REST PARAMETERS):
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+
+  console.log(sum);
+};
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+// combining with spread operator
+const x = [23, 5, 7];
+add(...x);
+
+// in a function
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
+*/
+
+/////////////////////////////////////////
+// SPREAD OPERATOR (...) - unpacks an array
+/* spread is on the right side of =!
+
+const arr = [7, 8, 9];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+// when you need individual elements
+console.log(...newArr);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// copying arrays (shallow)
+const mainMenuCopy = [...restaurant.mainMenu];
+
+// Join 2 arrays
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// iterables (array, strings, maps, sets but NOT objects)
+// on a string:
+const str = 'Elias';
+const letters = [...str, ' ', 'A.'];
+console.log(letters);
+console.log(...str);
+
+// spread operator in functions
+
+const ingredients = [
+  prompt(`Let's make pasta! Ingredient 1?`),
+  prompt(`Ingredient 2?`),
+  prompt(`Ingredient 3?`),
+];
+console.log(ingredients);
+restaurant.orderPasta(...ingredients);
+
+// spread operator in objects
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Lindel' };
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
+*/
+
+/////////////////////////////////////////
+// DESTRUCTURING OBJECTS
 
 /*
 restaurant.orderDelivery({
@@ -59,8 +206,6 @@ restaurant.orderDelivery({
 });
 */
 
-/////////////////////////////////////////
-// DESTRUCTURING OBJECTS
 /*
 const { name, openingHours, categories } = restaurant;
 console.log(name, openingHours, categories);
