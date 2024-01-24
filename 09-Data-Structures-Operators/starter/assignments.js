@@ -231,6 +231,37 @@ const books = [
 ];
 
 ///////////////////////////////////////
+// LOGICAL ASSIGNMENTS OPERATORS
+/*
+// OR Assignment operator
+for (let i = 0; i < books.length; i++) {
+  books[i].edition ||= 1;
+}
+
+// AND assignment operator
+for (let i = 0; i < books.length; i++) {
+  books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2);
+  console.log(
+    books[i].title,
+    books[i].thirdParty.goodreads.rating,
+    books[i].highlighted
+  );
+}
+console.log(books);
+*/
+
+///////////////////////////////////////
+// NULLISH COALESCING OPERATOR (??)
+/*
+for (let i = 0; i < books.length; i++) {
+  books[i].onlineContent ??
+    console.log(
+      `"${books[i].title}" provides no data about its online content`
+    );
+}
+*/
+
+///////////////////////////////////////
 // SHORT CIRCUITING (|| and &&)
 /*
 function hasExamplesInJava(book) {
