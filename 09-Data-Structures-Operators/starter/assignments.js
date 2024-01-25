@@ -231,6 +231,101 @@ const books = [
 ];
 
 ///////////////////////////////////////
+// LOOPING OBJECTS (KEYS, VALUES, ENTRIES)
+/*
+// 11.1
+const entries = [];
+for (key of Object.keys(books[0].thirdParty.goodreads)) {
+  entries.push([key]);
+}
+console.log(entries);
+
+// 11.2
+for ([key, value] of Object.values(books[0].thirdParty.goodreads).entries()) {
+  console.log(key, value);
+  entries[key].push(value);
+}
+console.log(entries);
+
+// 11.3
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+console.log(entries2);
+*/
+
+///////////////////////////////////////
+// OPTIONAL CHAINING ('?.')
+/*
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+};
+
+function getFirstKeyword(arr) {
+  const firstKeyword = arr.keywords?.[0];
+  console.log(firstKeyword);
+  return firstKeyword;
+}
+
+getFirstKeyword(books[0]);
+getFirstKeyword(newBook2);
+*/
+
+///////////////////////////////////////
+// ENHANCED OBJECT LITERALS
+/*
+// 9.1
+const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+
+const newBook = {
+  [bookData[0][0]]: [bookData[0][1]],
+  [bookData[1][0]]: [bookData[1][1][0], bookData[1][1][1]],
+  [bookData[2][0]]: [bookData[2][1]],
+};
+
+// 9.2
+const pages = 880;
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+  pages,
+};
+*/
+
+///////////////////////////////////////
+// FOR-OF LOOP (LOOPING ARRAYS)
+/*
+// 8.1
+let pageSum = 0;
+for (item of books) {
+  pageSum += item.pages;
+}
+
+console.log(pageSum);
+
+// 8.2
+const allAuthors = [];
+for (item of books) {
+  if (typeof item.author === 'string') {
+    allAuthors.push(item.author);
+  } else if (typeof item.author === 'object') {
+    for (let i = 0; i < item.author.length; i++) {
+      allAuthors.push(item.author[i]);
+    }
+  }
+}
+console.log(allAuthors);
+
+// 8.3
+for ([i, el] of allAuthors.entries()) {
+  console.log(`${i + 1}. ${el}`);
+}
+*/
+
+///////////////////////////////////////
 // LOGICAL ASSIGNMENTS OPERATORS
 /*
 // OR Assignment operator

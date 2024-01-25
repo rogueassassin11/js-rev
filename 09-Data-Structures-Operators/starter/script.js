@@ -1,5 +1,22 @@
 'use strict';
 
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
@@ -12,22 +29,10 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  // ES6 ENHANCED OBJECT LITERAL
+  openingHours,
 
-  order: function (starterIndex, mainIndex) {
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
@@ -54,6 +59,185 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+Let's continue with our football betting app!
+
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+      Odd of victory Bayern Munich: 1.33
+      Odd of draw: 3.25
+      Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+      {
+        Gnarby: 1,
+        Hummels: 1,
+        Lewandowski: 2
+      }
+
+GOOD LUCK 😀
+*/
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// 1
+for (const [index, player] of game.scored.entries()) {
+  console.log(`Goal ${index + 1}: ${player}`);
+}
+
+// 2
+let oddValuesSum = 0;
+for (const oddValues of Object.values(game.odds)) {
+  oddValuesSum += oddValues;
+}
+const oddValuesAvg = oddValuesSum / Object.values(game.odds).length;
+console.log(oddValuesAvg);
+
+// 3
+console.log(Object.entries(game.odds));
+for (const [i, el] of Object.entries(game.odds)) {
+  console.log(
+    `Odd of ${
+      game.hasOwnProperty(String(i)) ? `of victory ${game[i]}` : 'draw'
+    }: ${game.odds[i]}`
+  );
+}
+
+// BONUS
+function getScorers(arr) {
+  let counter = 0;
+  for (let i = 0; i < arr.length; i++) {
+    arr[i];
+  }
+}
+
+///////////////////////////////////////
+// LOOPING OBJECTS (KEYS, VALUES, ENTRIES)
+/*
+// for property names
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days `;
+
+// looping property names (keys)
+for (const day of Object.keys(openingHours)) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// for property values
+const values = Object.values(openingHours);
+console.log(values);
+
+// entries here: key and value
+// looping an entire object
+const entries = Object.entries(openingHours);
+// console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key}, we open at ${open} and close at ${close}`);
+}
+*/
+
+///////////////////////////////////////
+// OPTIONAL CHAINING ('?.')
+// -> if a certain property does not exist, undefined is returned immediately
+/*
+// without optional chaining
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open);
+
+// with optional chaining
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open);
+
+// example with object properties
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? `closed`;
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// for methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// For arrays
+const users = [{ name: 'Elias', email: 'elias@magus.com' }];
+console.log(users[0]?.name ?? 'User does not exist');
+
+// equivalent to:
+if (users.length > 0) console.log(users[0].name);
+else console.log('user array empty');
+*/
+
+///////////////////////////////////////
+// ENHANCED OBJECT LITERALS
+// 1. just including the object name
+// 2. writing methods does not need the function keyword
+// 3. object property names can now be computed
+
+///////////////////////////////////////
+// FOR-OF LOOP (LOOPING ARRAYS)
+/*
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// item is the current element in the iteration
+for (const item of menu) console.log(item);
+
+// to get current index by destructuring
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+// console.log([...menu.entries()]);
+*/
 
 ///////////////////////////////////////
 // Coding Challenge #1
