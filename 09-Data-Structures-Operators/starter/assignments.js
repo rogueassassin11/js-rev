@@ -231,6 +231,75 @@ const books = [
 ];
 
 ///////////////////////////////////////
+// MAPS (ITERATION)
+/*
+// 1
+const firstBookMap = new Map(Object.entries(books[0]));
+console.log(firstBookMap);
+
+// 2
+for (const [key, value] of firstBookMap) {
+  if (typeof value === 'number') console.log(key);
+}
+*/
+
+///////////////////////////////////////
+// MAPS (FUNDAMENTALS)
+/*
+// 13.1
+const bookMap = new Map([
+  ['title', 'Clean Code'],
+  ['author', 'Robert C. Martin'],
+]);
+
+// 13.2
+bookMap.set('pages', 464);
+
+// 13.3
+console.log(bookMap);
+const title = bookMap.get('title');
+const author = bookMap.get('author');
+console.log(`${title} by ${author}`);
+
+// 13.4
+console.log(bookMap.size);
+
+// 13.5
+if (bookMap.has('author')) console.log(`The author of the book is known`);
+*/
+
+///////////////////////////////////////
+// SETS
+/*
+// 12.1
+const allKeywords = [];
+for (let i = 0; i < books.length; i++) {
+  for (const keyword of books[i].keywords) {
+    allKeywords.push(keyword);
+  }
+}
+console.log(allKeywords);
+
+// 12.2 - 12.3
+const uniqueKeywords = new Set(allKeywords);
+console.log(uniqueKeywords);
+uniqueKeywords.add('coding');
+uniqueKeywords.add('science');
+console.log(uniqueKeywords);
+
+// 12.4
+uniqueKeywords.delete('business');
+
+// 12.5
+const uniqueKeywordsArr = [...uniqueKeywords];
+console.log(uniqueKeywordsArr);
+
+// 12.6
+uniqueKeywords.clear();
+console.log(uniqueKeywords);
+*/
+
+///////////////////////////////////////
 // LOOPING OBJECTS (KEYS, VALUES, ENTRIES)
 /*
 // 11.1

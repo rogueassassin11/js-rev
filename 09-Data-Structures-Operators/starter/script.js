@@ -61,6 +61,132 @@ const restaurant = {
 };
 
 ///////////////////////////////////////
+// MAPS (ITERATION)
+/*
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+// convert objects to map
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+// map as an iterable; objects are not
+// Quiz app
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+// const answer = Number(prompt('Your answer'));
+const answer = 3;
+console.log(answer);
+
+// challenge answer
+if (answer === question.get('correct')) {
+  console.log(question.get(true));
+} else {
+  console.log(question.get(false));
+}
+
+// quicker way:
+// console.log(question.get(question.get('correct') === answer));
+
+// convert map to array
+console.log([...question]);
+// console.log(question.entries()); same as above
+console.log([...question.keys()]);
+console.log([...question.values()]);
+*/
+
+///////////////////////////////////////
+// MAPS (FUNDAMENTALS)
+// - keys can be any data type unlike objects which are mainly strings
+/*
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+// methods on maps
+console.log(rest.has('categories'));
+rest.delete(2);
+rest.clear();
+// rest.set([1, 2], 'Test'); will not work
+const arr = [1, 2];
+rest.set(arr, 'Test');
+
+// with DOM Keys
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+console.log(rest.size);
+*/
+
+///////////////////////////////////////
+// SETS
+// - are also iterables but with unique elements
+/*
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);
+console.log(new Set('Elias'));
+
+// how many different items there are
+console.log(ordersSet.size);
+
+// to check if an item is included
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+
+// to add/delete new elements
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+// ordersSet.clear();
+console.log(ordersSet);
+
+// to retrieve? cannot be done; all are unique; use array if you need an index
+for (const order of ordersSet) console.log(order);
+
+// example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+
+console.log(new Set('Ainsworth').size);
+*/
+
+///////////////////////////////////////
 // Coding Challenge #2
 
 /* 
@@ -125,6 +251,7 @@ const game = {
   },
 };
 
+/*
 // 1
 for (const [index, player] of game.scored.entries()) {
   console.log(`Goal ${index + 1}: ${player}`);
@@ -149,12 +276,12 @@ for (const [i, el] of Object.entries(game.odds)) {
 }
 
 // BONUS
-function getScorers(arr) {
-  let counter = 0;
-  for (let i = 0; i < arr.length; i++) {
-    arr[i];
-  }
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
+console.log(scorers);
+*/
 
 ///////////////////////////////////////
 // LOOPING OBJECTS (KEYS, VALUES, ENTRIES)
