@@ -231,6 +231,35 @@ const books = [
 ];
 
 ///////////////////////////////////////
+// WORKING WITH STRINGS I
+/*
+// 15.1
+console.log(books[0].ISBN[6]);
+console.log(books[0].ISBN[4]);
+console.log(books[0].ISBN[9]);
+console.log(books[0].ISBN[8]);
+
+// 15.2
+const quote =
+  'A computer once beat me at chess, but it was no match for me at kick boxing';
+console.log(quote.indexOf('chess'));
+
+// 15.3
+console.log(quote.slice(quote.lastIndexOf(' ') + 1));
+
+// 15.4
+function isContributor(author) {
+  const contributor = author.slice(author.lastIndexOf(' ') + 1);
+  console.log(contributor);
+  if (contributor === '(Contributor)') return true;
+  else return false;
+}
+
+console.log(isContributor('Julie Sussman (Contributor)'));
+console.log(isContributor('Robert Sedgewick'));
+*/
+
+///////////////////////////////////////
 // MAPS (ITERATION)
 /*
 // 1

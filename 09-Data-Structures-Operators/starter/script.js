@@ -61,6 +61,132 @@ const restaurant = {
 };
 
 ///////////////////////////////////////
+// WORKING WITH STRINGS I
+// strings are also zero-based
+/*
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log(`B737`[0]);
+
+console.log(airline.length);
+console.log(`B737`.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+
+// 4 is the starting index to extract
+console.log(airline.slice(4));
+
+// end value is not included
+console.log(airline.slice(4, 7));
+
+// without hard-coding
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+// to get the last two characters
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+// in functions
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log(`You got the middle seat`);
+  } else {
+    console.log(`You got lucky`);
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// strings are objects when converting
+console.log(new String(`Elias`));
+console.log(typeof new String(`Elias`));
+*/
+
+///////////////////////////////////////
+// CODING CHALLENGE #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+/*
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+// 1
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// 2
+gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3
+console.log(
+  `An event happened, on average, every ${
+    [...gameEvents.keys()].pop() / gameEvents.size
+  } minutes`
+);
+
+// 4
+for (const [key, value] of gameEvents) {
+  let half = key <= 45 && key > 0 ? `[FIRST HALF]` : '[SECOND HALF]';
+  console.log(`${half} ${key}: ${value}`);
+}
+*/
+
+///////////////////////////////////////
+// WHICH DATA STRUCTURE TO USE?
+/*
+3 Sources of Data
+1. from the program itself
+2. from the UI/DOM/User
+3. from external sources: Web API
+
+**Simple lists? - Arrays or Sets
+**Key Value Pairs? - Objects or Maps
+
+ARRAYS vs SETS
+- arrays when you need ordered list of values
+- arrays when you need to manipulate data
+- sets if unique values are needed or to remove duplicates
+
+OBJECTS vs MAPS
+- objects are more traditional and easier to write and access; easier to write and can have functions
+- maps have better performance with keys that can have any data type (when keys that are not strings are needed)
+*/
+
+///////////////////////////////////////
 // MAPS (ITERATION)
 /*
 const question = new Map([
