@@ -231,6 +231,76 @@ const books = [
 ];
 
 ///////////////////////////////////////
+// WORKING WITH STRINGS II
+/*
+// 16.1
+function normalizeAuthorName(author) {
+  const lowercase = author.toLowerCase().trim();
+  console.log(lowercase);
+  let contributor;
+  if (lowercase.includes(`(contributor)`)) {
+    contributor = lowercase.replace('(contributor)', '');
+  } else {
+    contributor = lowercase;
+  }
+  console.log(contributor);
+
+  const toUpper1 =
+    contributor[0].toUpperCase() +
+    contributor.slice(1, contributor.indexOf(' '));
+  console.log(toUpper1);
+  const toUpper2 =
+    contributor[contributor.indexOf(' ') + 1].toUpperCase() +
+    contributor.slice(contributor.indexOf(' ') + 2, -1);
+
+  console.log(toUpper1, toUpper2);
+  return toUpper1 + ' ' + toUpper2;
+}
+
+console.log(normalizeAuthorName('  JuliE sussMan (Contributor)'));
+*/
+// 16.1 answer:
+/*
+function normalizeAuthorName(author) {
+  author = author.trim();
+  const firstName = author.slice(0, author.indexOf(' '));
+  const lastName = author.slice(author.indexOf(' ') + 1, author.lastIndexOf(' ') + 1);
+  const capitalizedFirstName = firstName[0].toUpperCase() + firstName.slice(1).toLowerCase();
+  const capitalizedLastName = lastName[0].toUpperCase() + lastName.slice(1).toLowerCase();
+
+  return capitalizedFirstName + ' ' + capitalizedLastName;
+}
+*/
+/*
+// 16.2
+const newBookTitle = books[1].title.replace('Programs', 'Software');
+console.log(newBookTitle);
+
+// 16.3
+function logBookTheme(bookTitle) {
+  const lowercase = bookTitle.toLowerCase();
+
+  if (lowercase.startsWith(`computer`)) {
+    console.log(`This book is about computers`);
+  } else if (
+    lowercase.includes(`algorithms`) ||
+    lowercase.includes(`structures`)
+  ) {
+    console.log(`This book is about algorithms and data structures`);
+  } else if (
+    (lowercase.endsWith(`system`) || lowercase.endsWith(`systems`)) &&
+    !lowercase.includes(`operating`)
+  ) {
+    console.log(
+      `This book is about some systems, but definitely not about operating systems`
+    );
+  }
+}
+
+logBookTheme(books[0].title);
+*/
+
+///////////////////////////////////////
 // WORKING WITH STRINGS I
 /*
 // 15.1

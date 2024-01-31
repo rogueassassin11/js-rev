@@ -61,6 +61,166 @@ const restaurant = {
 };
 
 ///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const namesArr = text.split('\n');
+  console.log(namesArr);
+  for (let i = 0; i < namesArr.length; i++) {
+    let normalized = namesArr[i].toLowerCase().trim();
+    let [name1, name2] = normalized.split('_');
+    let camelCase = name1 + name2.replace(name2[0], name2[0].toUpperCase());
+    console.log(`${camelCase.padEnd(20, ' ')} ${'✅'.repeat(i + 1)}`);
+  }
+});
+
+///////////////////////////////////////
+// WORKING WITH STRINGS III
+/*
+// split creates an array
+console.log('a+very+nice+string'.split(`+`));
+console.log(`Elias Ainsworth`.split(' '));
+
+const [firstName, lastName] = `Elias Ainsworth`.split(' ');
+
+// join
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+  for (const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    // namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('chise hatori');
+
+// padding start and end
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+').padEnd(30, '+'));
+console.log('Elias'.padStart(25, '+').padEnd(30, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(43243224));
+maskCreditCard(4324322443242234923945353);
+
+// repeat methods
+const message2 = 'Bad weather... All Departures Delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+*/
+
+///////////////////////////////////////
+// WORKING WITH STRINGS II
+//
+/*
+const airline = 'TAP Air Portugal';
+
+console.log(airline.toLowerCase());
+console.log(`Elias`.toUpperCase());
+
+// Fix capitalization in name
+const passenger = 'EliAS';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+// comparing email
+const email = 'hello@elias.io';
+const loginEmail = '  Hello@Elias.Io \n';
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+// replacing (this is case sensitive)
+const priceGB = '288,97P';
+const priceUS = priceGB.replace('P', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate')); // replaceAll now works!
+
+console.log(announcement.replace(/door/g, 'gate'));
+
+// Booleans
+const plane = 'Airbus A320neo';
+console.log(plane.includes(`A320`));
+console.log(plane.includes(`Boeing`));
+console.log(plane.startsWith(`Aib`));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo'))
+  console.log(`Part of the NEW airbus family`);
+
+// practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log(`You are not allowed on board`);
+  } else {
+    console.log(`Welcome aboard`);
+  }
+};
+checkBaggage(`I have a laptop, some Food, and a pocket Knife`);
+checkBaggage(`Socks and camera`);
+checkBaggage(`Got some snacks and a gun for protection`);
+*/
+
+///////////////////////////////////////
 // WORKING WITH STRINGS I
 // strings are also zero-based
 /*
