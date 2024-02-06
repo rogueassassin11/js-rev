@@ -325,3 +325,124 @@ poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 */
+
+///////////////////////////////////////
+// IIFE
+// -> a function that only executes once
+// -> to encapsulate a private variable
+// -> not used anymore; you can encapsulate using blocks {}
+/*
+const runOnce = function () {
+  console.log(`This will never run again`);
+};
+runOnce();
+
+// IIFE Syntax
+(function () {
+  console.log(`This will never run again`);
+  const isPrivate = 23;
+})();
+
+(() => console.log(`This will also never run again`))();
+
+// block scopes
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+
+console.log(notPrivate);
+*/
+
+///////////////////////////////////////
+// CLOSURES
+// -> a function has access to the variable environment (VE) of the execution context in which it was created even when it is gone
+// -> the closure is the VE attached to the function exactly as it was at the time and place the function was created
+// -> because of closure, a function has access to the variables created in its birthplace
+// -> closures have higher priority than the scope chain
+/*
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+// to inspect closures:
+console.dir(booker);
+
+// other closure examples:
+// closures can change when reassigned
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+
+// reassigning f function
+h();
+f();
+console.dir(f);
+
+// example 2 (timer)
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+setTimeout(function () {
+  console.log(`TIMER`);
+}, 1000);
+
+boardPassengers(180, 3);
+*/
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+/*
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
+*/
