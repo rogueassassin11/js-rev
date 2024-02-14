@@ -76,7 +76,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__date">3 days ago</div>
+      <div class="movements__date"></div>
       <div class="movements__value">${mov}€</div>
     </div>
     `;
@@ -90,9 +90,9 @@ console.log(containerMovements.innerHTML);
 ///////////////////////////////////////////
 // DISPLAY BALANCE
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} €`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
 ///////////////////////////////////////////
@@ -136,6 +136,17 @@ createUsernames(accounts);
 ///////////////////////////////////////////
 // LOGIN EVENT HANDLER
 
+const updateUI = function (acc) {
+  // display movements
+  displayMovements(acc.movements);
+
+  // display balance
+  calcDisplayBalance(acc);
+
+  // display summary
+  calcDisplaySummary(acc);
+};
+
 let currentAccount;
 
 btnLogin.addEventListener('click', function (e) {
@@ -160,14 +171,82 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     containerApp.style.opacity = 100;
 
-    // display movements
-    displayMovements(currentAccount.movements);
+    // updates balance, summary, and movements
+    updateUI(currentAccount);
+  }
+});
 
-    // display balance
-    calcDisplayBalance(currentAccount.movements);
+///////////////////////////////////////////
+// REQUESTING LOAN EVENT HANDLER
 
-    // display summary
-    calcDisplaySummary(currentAccount);
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // add movement
+    currentAccount.movements.push(amount);
+
+    // update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+///////////////////////////////////////////
+// CLOSE ACCOUNT EVENT HANDLER
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    // returns the first index of the condition that is found true
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    console.log(index);
+
+    // delete the account from the array
+    accounts.splice(index, 1);
+
+    // hide the UI
+    containerApp.style.opacity = 0;
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+///////////////////////////////////////////
+// TRANSFER
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // getting values from input fields
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  // clearing input fields
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    // doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // update UI
+    updateUI(currentAccount);
   }
 });
 
@@ -531,4 +610,64 @@ let accountFor = [];
 for (const acc of accounts)
   if (acc.owner === 'Jessica Davis') accountFor.push(acc);
 console.log(accountFor);
+*/
+
+///////////////////////////////////////
+// SOME AND EVERY METHOD
+/*
+
+// includes only checks for equality
+console.log(movements);
+console.log(movements.includes(-130));
+
+// some() can check for a condition if there is any value
+console.log(movements.some(mov => mov === -130));
+const anyDeposits = movements.some(mov => mov > 5000);
+console.log(anyDeposits);
+
+// every() - only returns true if all the elements passes the condition in the array
+console.log(movements.every(mov => mov > 0));
+
+console.log(account4.movements.every(mov => mov > 0));
+
+// separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
+*/
+
+///////////////////////////////////////
+// FLAT AND FLATMAP METHOD
+/* FLAT -> flattens the array and you can specify depth as a parameter
+   FLATMAP -> Maps and then flattens but only 1 level
+ */
+/*
+// arr.flat(depth of the array)
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [[4, 5], 6], 7, 8];
+console.log(arrDeep.flat(2));
+
+// use case of flat()
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+// chaining with flat()
+const overallBalanceChain = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalanceChain);
+
+// flatMap() - only one level
+const overallBalanceChainFM = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalanceChainFM);
 */
