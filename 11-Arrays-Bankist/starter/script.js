@@ -64,11 +64,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 ///////////////////////////////////////////////// CREATING DOM ELEMENTS
 
 // displaying movements
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   // to remove dummy html:
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  // sorting
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -221,7 +224,7 @@ btnClose.addEventListener('click', function (e) {
 });
 
 ///////////////////////////////////////////
-// TRANSFER
+// TRANSFER EVENT HANDLER
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
@@ -248,6 +251,18 @@ btnTransfer.addEventListener('click', function (e) {
     // update UI
     updateUI(currentAccount);
   }
+});
+
+///////////////////////////////////////////
+// SORT EVENT HANDLER
+
+// sort state variable
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -670,4 +685,98 @@ const overallBalanceChainFM = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalanceChainFM);
+*/
+
+///////////////////////////////////////
+// SORTING ARRAYS sort()
+/*
+  -> mutates the original array
+  -> sort() converts to strings then sorts ascendingly
+  -> does not work if combination of strings and numbers
+ */
+/*
+// Sorting with strings
+const owners = ['Elias', 'Chise', 'Lindel', 'Angelica'];
+console.log(owners.sort());
+
+// Sorting with numbers
+console.log(movements);
+
+// return < 0 = A, B (keep order)
+// return > 0 = B, A  (switch order)
+// if 0, position remains the same
+// ascending order:
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// descending order
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
+*/
+
+///////////////////////////////////////
+// CREATE AND FILL ARRAYS
+/*
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5));
+
+// array constructor function
+const x = new Array(7); // 7 empty array elements
+console.log(x);
+
+// fill() mutates the underlying array
+// x.fill(1);
+// fill(element fill, start index, end index)
+x.fill(1, 3, 5);
+console.log(x);
+
+arr.fill(23, 2, 6);
+console.log(arr);
+
+// array.from() -> first argument is an object, second is a callback function
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+// random filling of an array
+const a = Array.from({ length: 10 }, (cur, i) =>
+  Math.trunc(Math.random() * 10)
+);
+console.log(a);
+
+// creating array from reading DOM
+// Array.from() can convert a nodelist into an array
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+});
+*/
+
+///////////////////////////////////////
+// WHICH ARRAY METHOD TO USE?
+/*
+1. To mutate original array: push, unshift, pop, shift, splice, reverse, sort, fill
+2. A new array: map, filter, slice, concat, flat, flatMap
+3. An array index: indexOf, findIndex
+4. An array element: find()
+5. Know if array includes: includes(), some(), every()
+6. A new string: join()
+7. To transform to one value: reduce()
+8. To just loop array: forEach()
 */
