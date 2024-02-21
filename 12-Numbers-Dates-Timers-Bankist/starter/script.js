@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,19 +104,19 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -252,7 +252,8 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
-///////////////////////////////////////////// CONVERTING AND CHECKING NUMBERS
+/////////////////////////////////////////////
+// CONVERTING AND CHECKING NUMBERS
 /* -> in JS all numbers are floating nos. 
   -> Base 10 = 0 to 9
   -> binary base 2 = 0 and 1
@@ -289,4 +290,183 @@ console.log(Number.isFinite(+'20X'));
 console.log(Number.isInteger(23));
 console.log(Number.isInteger(23.0));
 console.log(Number.isInteger(23 / 0));
+*/
+
+///////////////////////////////////////////// MATH AND ROUNDING
+/*
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(8 ** (1 / 3));
+
+// Math.max returns max value and does type coercion but not parsing
+console.log(Math.max(5, 18, 23, 11, 2));
+console.log(Math.max(5, 18, '23', 11, 2));
+console.log(Math.max(5, 18, '23px', 11, 2));
+console.log(Math.min(5, 18, '23', 11, 2));
+
+console.log(Math.PI * Number.parseFloat('10px') ** 2);
+
+// random numbers
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+// function for getting random numbers at a certain range
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+console.log(randomInt(10, 20));
+
+// Rounding integers (does type coercion)
+console.log(Math.trunc(23.3));
+
+console.log(Math.round(23.3));
+console.log(Math.round(23.9));
+
+// ceil rounds up
+console.log(Math.ceil(23.3));
+console.log(Math.ceil(23.9));
+
+// floor rounds down
+console.log(Math.floor(23.3));
+console.log(Math.floor(23.9));
+
+// on negative numbers truncates, floor rounds up negative nos.
+console.log(Math.trunc(-23.3));
+console.log(Math.floor(-23.3));
+
+// Rounding decimals
+// toFixed returns a string and not number
+console.log((2.7).toFixed(0));
+console.log((2.7).toFixed(3));
+console.log((2.345).toFixed(2));
+console.log(+(2.345).toFixed(2));
+*/
+
+///////////////////////////////////////////// REMAINDER OPERATOR
+// -> returns the remainder of a division
+/*
+console.log(5 % 2);
+console.log(5 / 2); // 5 = 2 * 2 + 1
+
+console.log(8 % 3);
+console.log(8 / 3);
+
+console.log(6 % 2);
+console.log(6 / 2);
+
+console.log(7 % 2);
+console.log(7 / 2);
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+
+// you can use remainder operator for every Nth time you need to do anything
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
+*/
+
+///////////////////////////////////////////// NUMERIC SEPARATORS
+// 287,460,000,000
+/*
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const price = 345_99;
+console.log(price);
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+const PI = 3.1415;
+console.log(PI);
+
+console.log(Number('23000'));
+console.log(Number('230_000'));
+console.log(parseInt('230_000'));
+*/
+
+///////////////////////////////////////////// WORKING WITH BIGINT
+/*
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+
+// unsafe numbers
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+// n transforms a big number into a bigint
+console.log(454544123214143434213214n);
+console.log(BigInt(454544123214143434213214));
+
+// Operations - all usual operators work the same
+console.log(10000n + 10000n);
+console.log(342342342342344232424234n * 1000000000n);
+
+// cannot mix bigint and number types
+const huge = 21332132131321312312312n;
+const num = 23;
+console.log(huge * BigInt(num));
+
+// exceptions for mixing
+console.log(20n > 15); // still true
+console.log(20n === 20);
+console.log(typeof 20n);
+console.log(20n == 20); // type coercion at work
+console.log(huge + ' is really big!!!');
+
+// Divisions
+console.log(11n / 3n);
+console.log(10 / 3);
+*/
+
+///////////////////////////////////////////// CREATING DATES
+/*
+// create a date
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Feb 21 2024 15:48:05'));
+console.log(new Date('December 24, 2015'));
+
+console.log(new Date(account1.movementsDates[0]));
+
+// month in JS is zero-based! 10 is november
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+
+// auto corrects days
+console.log(new Date(2037, 10, 31));
+
+// unix time
+console.log(new Date(0));
+
+// unix time stamp
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+*/
+/*
+// working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString()); // string
+console.log(future.getTime()); // unix time stamp
+
+console.log(new Date(2142228180000));
+
+// now's time stamp
+console.log(Date.now());
+
+future.setFullYear(2040);
+console.log(future);
 */
