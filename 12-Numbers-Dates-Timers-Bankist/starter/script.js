@@ -169,6 +169,7 @@ const calcDisplaySummary = function (acc) {
   labelSumInterest.textContent = formatCur(interest, acc.locale, acc.currency);
 };
 
+// Creating Usernames
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -180,6 +181,7 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+// Updating UI
 const updateUI = function (acc) {
   // Display movements
   displayMovements(acc);
@@ -191,14 +193,48 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+// Logout Timer
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // In each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    if (time === 0) {
+      clearInterval(timer);
+
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+
+    // Decrease 1s
+    time--;
+
+    // When 0 seconds, stop timer and log out user
+  };
+
+  // Set time to 5 mins
+  let time = 120;
+
+  // call tick function immediately
+  tick();
+
+  // Call the timer every second
+
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // always logged in
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -249,6 +285,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // Log out timer, clear first if there is any
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -278,6 +318,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // Reset the timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -287,14 +331,20 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    // Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+
+      // Reset the timer
+      clearInterval(timer);
+      timer = startLogOutTimer();
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -568,7 +618,7 @@ console.log(days1);
 
 //////////////////////////////////////////
 // INTERNATIONALIZING DATES II
-
+/*
 const num = 3884764.23;
 
 const options = {
@@ -585,3 +635,29 @@ console.log(
   navigator.language,
   new Intl.NumberFormat(navigator.language, options).format(num)
 );
+*/
+
+//////////////////////////////////////////
+// setTimeout - runs only once
+// and
+// setInterval - runs over and over again
+// AJAX
+// set arguments after the delay
+
+/*
+const ingredients = ['olives', 'spinach']
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza 🍕 ${ing1} and ${ing2}`),
+  3000,
+  ...ingredients
+);
+console.log('Waiting...');
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+*/
+
+// setInterval
+// setInterval(function () {
+//   const now = new Date();
+//   console.log(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
+// }, 10000);
