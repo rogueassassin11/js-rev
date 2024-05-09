@@ -34,6 +34,41 @@ document.addEventListener('keydown', function (e) {
 });
 
 ///////////////////////////////////////
+// Smooth Scrolling
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.scrollX, window.scrollY);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.scrollX,
+  //   s1coords.top + window.scrollY
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.scrollX,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///////////////////////////////////////
 // How the DOM works behind the scenes
 /*
 DOM
@@ -45,7 +80,7 @@ DOM
 
 ///////////////////////////////////////
 // Selecting, Creating, and Deleting Elements
-
+/*
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
@@ -93,10 +128,11 @@ document.querySelector('.btn btn--close-cookie') /
     // old way by DOM Traversing
     message.parentElement.removeChild(message);
   });
+*/
 
 /////////////////////////////////////////////
 // Styles, Attributes, and Classes
-
+/*
 // Styles
 // using style property   set as an inline styles
 message.style.backgroundColor = '#37383d';
@@ -148,3 +184,37 @@ logo.classList.contains('Elias', 'Chise'); // not includes
 
 // to set a class name
 logo.className = 'Juuzo'; // do not use this! it overrides all existing classes
+*/
+
+/////////////////////////////////////////////
+// Types of Events and Event Handlers
+/*
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :)');
+
+  h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+// old school of listening for events
+// h1.onmouseenter = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :)');
+// };
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+*/
+
+/////////////////////////////////////////////
+// BUBBLING AND CAPTURING IN EVENTS
+// PROPAGATING EVENTS
+/*
+1. Capturing Phase
+2. Target Phase
+3. Bubbling 
+    - climbs up to the parents
+    - it is as if the event happened on the parents
+
+*/
