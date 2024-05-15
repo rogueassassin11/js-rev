@@ -211,10 +211,45 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // BUBBLING AND CAPTURING IN EVENTS
 // PROPAGATING EVENTS
 /*
-1. Capturing Phase
+1. Capturing Phase - sometimes irrelevant and not useful
 2. Target Phase
 3. Bubbling 
     - climbs up to the parents
-    - it is as if the event happened on the parents
-
+    - the event starts from the target and bubbles up as if the event happened on the parents
+ 4. addEventListeners - only listen for events in the bubbling phase;
+      - adding 'true' - makes it listen for the capturing phase; reverses the order, event travels down
 */
+
+// rgb(255, 2555, 255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Link', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+
+  // To stop the event propagation (generally not a good ideea, but can be done)
+  e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('Container', e.target, e.currentTarget);
+});
+
+// setting to 'true' makes it 'capture'
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('Nav', e.target, e.currentTarget);
+  },
+  true
+);
+
+/////////////////////////////////////////////
+// EVENT DELEGATION: IMPLEMENTING PAGE NAV
+//
