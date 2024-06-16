@@ -1,12 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -36,9 +38,6 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////
 // Smooth Scrolling
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
   console.log(s1coords);
@@ -66,6 +65,36 @@ btnScrollTo.addEventListener('click', function (e) {
   // });
 
   section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+/////////////////////////////////////////////
+// Page Navigation
+
+//without Event Delegation
+/*
+document.querySelectorAll('.nav__link').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    console.log('Link!');
+    const id = this.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+*/
+
+// With Event Delegation
+// 1. Add event listener to common parent element
+// 2. Determine what element orignated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Matching strategy (check if the target element contains the class you are interested in)
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 ///////////////////////////////////////
@@ -219,7 +248,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
  4. addEventListeners - only listen for events in the bubbling phase;
       - adding 'true' - makes it listen for the capturing phase; reverses the order, event travels down
 */
-
+/*
 // rgb(255, 2555, 255)
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
@@ -249,7 +278,38 @@ document.querySelector('.nav').addEventListener(
   },
   true
 );
+*/
 
 /////////////////////////////////////////////
-// EVENT DELEGATION: IMPLEMENTING PAGE NAV
-//
+// DOM TRAVERSING
+
+const h1 = document.querySelector('h1');
+
+// Going downwards: selecting child
+console.log(h1.querySelectorAll('.highlight')); //finds children no matter how deep in the DOM tree
+console.log(h1.childNodes); //not that used
+console.log(h1.children); // returns direct children through an HTML Collection
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards: selecting parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// finding the parent element in the DOM tree no matter how far
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+h1.closest('h1').style.background = 'var(--gradient-primary )';
+
+// Going sideways: accessing Siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+
+// turn the HTML collection into an array
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});
