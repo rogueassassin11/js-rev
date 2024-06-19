@@ -97,6 +97,33 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
+/////////////////////////////////////////////
+// TABBED COMPONENT
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// Use event delegation on the common parent element
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  // Guard clause - an if statement that will return early if a condition is matched
+  if (!clicked) return;
+
+  // remove active class on all
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // add active class on clicked
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  console.log(clicked.dataset.tab);
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
 ///////////////////////////////////////
 // How the DOM works behind the scenes
 /*
@@ -282,7 +309,7 @@ document.querySelector('.nav').addEventListener(
 
 /////////////////////////////////////////////
 // DOM TRAVERSING
-
+/*
 const h1 = document.querySelector('h1');
 
 // Going downwards: selecting child
@@ -313,3 +340,4 @@ console.log(h1.parentElement.children);
 [...h1.parentElement.children].forEach(function (el) {
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
+*/
